@@ -14,3 +14,5 @@ urlpatterns = [
     path("negative", views.negative, name="negative"),
     path("alerts", views.alerts, name="alerts"),
 ]
+
+app_name = "customer"

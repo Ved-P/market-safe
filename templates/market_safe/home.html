@@ -11,13 +11,16 @@
   <body>
     <div id="top">
       <h1>Market Safe!</h1>
-      <h3>An all-in-one shop visit planning and contact tracing app!</h3>
+      <h3>An all-in-one shop visit planning and contact tracing site!</h3>
     </div>
     <div id="left">
       <p>As our society emerges from the COVID - 19 pandemic, we need a way to be socially distant while still getting the resources we need from stores outside. Market Safe is a tool that can help us prevent a second wave of the virus. It allows businesses and customers to connect, plan out the visitors coming into the store, and also functions as a contact tracing site to alert businesses and customers that may have been in contact with a user who tested positive. This is Market Safe!</p>
     </div>
     <div id="right">
-      Hello?
+      <a href="{% url 'customer:signup' %}"><button>Sign Up as a Customer</button></a><br>
+      <a href="{% url 'customer:login' %}"><button>Log in as a Customer</button></a><br>
+      <a href="{% url 'business:register' %}"><button>Register your Business</button></a><br>
+      <a href="{% url 'business:register' %}"><button>Log in as a Business</button></a>
     </div>
   </body>
 </html>
