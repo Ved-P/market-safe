@@ -1,0 +1,40 @@
+h1 {
+  font-family: Fondamento, sans-serif;
+}
+
+h1, form {
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  color: #0099FF;
+  background-color: #FFFF99;
+  border: 3px solid #FFCC33;
+  border-radius: 20px;
+  width: 20%;
+  margin-left: 40%;
+}
+
+form {
+  font-family: Josefin Sans, sans-serif;
+  text-align: center;
+}
+
+input[type="submit"] {
+  color: #FFFF00;
+  background-color: #0099FF;
+  border: 3px solid #00CCFF;
+  border-radius: 20px;
+}
+
+input[type="submit"]:hover {
+  color: #0099FF;
+  background-color: #FFFF00;
+}
+
+input[type="submit"]:active {
+  color: #FFCC33;
+}
+
+a {
+  text-decoration: underline;
+}

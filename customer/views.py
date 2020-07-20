@@ -57,7 +57,7 @@ def signup_view(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse("customer:customer"))
             else:
-                return render(request, "customer/login.html", {
+                return render(request, "customer/signup.html", {
                     "message": "Sorry, there was some error."
                 })
     else:

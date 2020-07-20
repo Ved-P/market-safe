@@ -1,17 +1,70 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:login"))
+    return HttpResponse("hello")
 
 def login_view(request):
-    pass
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:business"))
+    elif request.method == "POST":
+        username = request.POST["username"]
+        password = request. POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("business:business"))
+        else:
+            return render(request, "business/login.html", {
+                "message": "Wrong username or password."
+            })
+    else:
+        return render(request, "business/login.html")
 
 def logout_view(request):
-    pass
+    if request.user.is_authenticated:
+        logout(request)
+        return render(request, "business/login.html", {
+            "message": "Logged out succesfully."
+        })
+    else:
+        return HttpResponseRedirect("business:login")
 
 def register_view(request):
-    pass
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:business"))
+    elif request.method == "POST":
+        username = request.POST["username"]
+        password = request. POST["password"]
+        name = request.POST["name"]
+        max_customers = request.POST["max_customers"]
+        avg_customers = request.POST["avg_customers"]
+        employees = request.POST["employees"]
+        area = request.POST["area"]
+
+        if User.objects.filter(username=username).exists():
+            return render(request, "business/register.html", {
+                "message": "That username is already taken."
+            })
+        else:
+            user = User.objects.create_user(username=username, password=password, first_name=name)
+            user.save()
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("business:business"))
+            else:
+                return render(request, "business/register.html", {
+                    "message": "Sorry, there was some error."
+                })
+    else:
+        return render(request, "business/register.html")
 
 def edit(request):
     pass
