@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -36,7 +37,31 @@ def logout_view(request):
         return HttpResponseRedirect("customer:login")
 
 def signup_view(request):
-    pass
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:customer"))
+    elif request.method == "POST":
+        username = request.POST["username"]
+        password = request. POST["password"]
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+
+        if User.objects.filter(username=username).exists():
+            return render(request, "customer/signup.html", {
+                "message": "That username is already taken."
+            })
+        else:
+            user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
+            user.save()
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("customer:customer"))
+            else:
+                return render(request, "customer/login.html", {
+                    "message": "Sorry, there was some error."
+                })
+    else:
+        return render(request, "customer/signup.html")
 
 def search(request):
     pass
