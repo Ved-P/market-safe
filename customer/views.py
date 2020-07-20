@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Customer
 
 # Create your views here.
 def index(request):
@@ -52,6 +53,8 @@ def signup_view(request):
         else:
             user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
             user.save()
+            customer = Customer(user=user, test_status=0, quarantined=0)
+            customer.save()
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)

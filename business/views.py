@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Business
 
 # Create your views here.
 def index(request):
@@ -55,6 +56,8 @@ def register_view(request):
         else:
             user = User.objects.create_user(username=username, password=password, first_name=name)
             user.save()
+            business = Business(user=user, name=name, max_customers=max_customers, avg_customers=avg_customers, employees=employees, area=area, open=1)
+            business.save()
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
