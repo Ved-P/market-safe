@@ -28,7 +28,10 @@ def login_view(request):
 
 def logout_view(request):
     if request.user.is_authenticated:
-        pass
+        logout(request)
+        return render(request, "customer/login.html", {
+            "message": "Logged out succesfully."
+        })
     else:
         return HttpResponseRedirect("customer:login")
 
