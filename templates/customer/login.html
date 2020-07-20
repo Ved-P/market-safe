@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Market Safe - Log In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fondamento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'customer/lisu.css' %}">
+  </head>
+  <body>
+    {% if message %}
+      <div class="alert alert-danger" role="alert">{{ message }}</div>
+    {% endif %}
+    <h1>Log In:</h1>
+    <form action="{% url 'customer:login' %}" method="post">
+      {% csrf_token %}
+      <p>Username:</p>
+      <input type="text" name="username"><br><br>
+      <p>Password:</p>
+      <input type="password" name="password"><br><br>
+      <input type="submit" value="Log In!"><br><br>
+      Not a customer? Go to <a href="{% url 'home' %}">Home</a>.
+    </form>
+  </body>
+</html>
