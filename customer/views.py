@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Customer
+from ..business.models import Business
 
 # Create your views here.
 def index(request):
@@ -73,8 +74,13 @@ def signup_view(request):
 def search(request):
     pass
 
-def view(request):
-    pass
+def view(request, key):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        business = Business.objects.get(pk=key)
+        return HttpResponse(business)
+        pass
 
 def reccomendation(request):
     pass
