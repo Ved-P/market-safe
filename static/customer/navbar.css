@@ -1,0 +1,20 @@
+nav {
+  width: 100%;
+  background-color: #FFFF99;
+  color: #0099FF;
+  padding: 25px;
+}
+
+h2 {
+  font-family: Fondamento, sans-serif;
+  display: inline;
+}
+
+a {
+  padding: 100px;
+}
+
+.small {
+  font-family: Josefin Sans, sans-serif;
+  font-size: 20px;
+}
