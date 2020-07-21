@@ -72,7 +72,22 @@ def signup_view(request):
         return render(request, "customer/signup.html")
 
 def search(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    elif request.method == "POST":
+        query = request.POST["query"]
+        try:
+            businesses = Business.objects.filter(name__icontains=query)
+        except DoesNotExist:
+            businesses = []
+        return render(request, 'customer/search.html', {
+            "businesses": businesses
+        })
+    else:
+        businesses = Business.objects.all()
+        return render(request, 'customer/search.html', {
+            "businesses": businesses
+        })
 
 def view(request, key):
     if not request.user.is_authenticated:

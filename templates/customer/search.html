@@ -1,0 +1,24 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/searchs.css' %}">
+{% endblock %}
+
+{% block body %}
+  <form action="{% url 'customer:search' %}" method="post">
+    {% csrf_token %}
+    Search for a business: <input type="text" name="query">
+    <input type="submit" value="Search!">
+  </form>
+  {% for business in businesses %}
+    <a class="no-padding" href="{% url 'customer:view' business.id %}">
+      <div class="business">
+        <h1>{{ business.name }}</h1>
+        <h3>Click here to view this businesses site.</h3>
+      </div>
+    </a>
+  {% empty %}
+    <p>No businesses match your search.</p>
+  {% endfor %}
+{% endblock %}
