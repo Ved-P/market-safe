@@ -79,8 +79,11 @@ def view(request, key):
         return HttpResponseRedirect(reverse("customer:login"))
     else:
         business = Business.objects.get(pk=key)
-        return HttpResponse(business)
-        pass
+        return render(request, 'customer/view.html', {
+            "business_name": business.name,
+            "max_customers": business.max_customers,
+            "open": business.open
+        })
 
 def reccomendation(request):
     pass

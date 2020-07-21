@@ -2,8 +2,15 @@
 {% load static %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{% static 'customer/view.css' %}">
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
 {% endblock %}
 
 {% block body %}
+  <h1>{{ business_name }}</h1>
+  <p>Welcome to the Market Safe site for {{ business_name }}. This store allows {{ max_customers }} customers at a time.</p>
+  {% if open == 0 %}
+    <p>This store is currently closed. Sorry for the inconvenience.</p>
+  {% elif open == 1 %}
+    <p>This store is open. See our AI Reccomendation and reserve a spot <a id="test" href="url 'customer/reccomendation'">here</a>.</p>
+  {% endif %}
 {% endblock %}
