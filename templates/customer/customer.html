@@ -1,7 +1,17 @@
 {% extends 'customer/layout.html' %}
+{% load static %}
 
 {% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
 {% endblock %}
 
 {% block body %}
+  <h1>Welcome, {{ request.user.first_name }} {{ request.user.last_name}}!</h1>
+  <p>This is your dashboard. To search for businesses, please click Search on the navigation bar. To see any alerts about COVID - 19, click Alerts.</p>
+  {% if test_status == 0 %}
+    <p>Have you tested positive for COVID - 19? If so, click <a id="test" href="{% url 'customer:positive' %}">here</a>.</p>
+  {% elif test_status == 1 %}
+    <p>Have you recovered from COVID - 19? If so, click <a id="test" href="{% url 'customer:negative' %}">here</a>.</p>
+  {% endif %}
+  <p>Thank you for using Market Safe!</p>
 {% endblock %}

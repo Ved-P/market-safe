@@ -9,7 +9,11 @@ from .models import Customer
 def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("customer:login"))
-    return render(request, "customer/customer.html")
+    else:
+        customer = Customer.objects.get(user=request.user)
+        return render(request, "customer/customer.html", {
+            "test_status": customer.test_status
+        })
 
 def login_view(request):
     if request.user.is_authenticated:
