@@ -75,7 +75,23 @@ def register_view(request):
         return render(request, "business/register.html")
 
 def edit(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:login"))
+    elif request.method == "POST":
+        max_customers = request.POST["max_customers"]
+        avg_customers = request.POST["avg_customers"]
+        employees = request.POST["employees"]
+        area = request.POST["area"]
+        Business.objects.filter(user=request.user).update(max_customers=max_customers, avg_customers=avg_customers, employees=employees, area=area)
+        return HttpResponseRedirect(reverse("business:analytics"))
+    else:
+        business = Business.objects.get(user=request.user)
+        return render(request, "business/edit.html", {
+            "max_customers": business.max_customers,
+            "avg_customers": business.avg_customers,
+            "employees": business.employees,
+            "area": business.area
+        })
 
 def analytics(request):
     if not request.user.is_authenticated:

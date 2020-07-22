@@ -1,0 +1,23 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+  <style>
+    input[type="submit"] {
+      margin-left: 50px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <form action="{% url 'business:edit' %}" method="post">
+    {% csrf_token %}
+    <h1>Edit analytics for {{ request.user.first_name }}.</h1>
+    <p>Maximum number of customers at a time: <input type="number" name="max_customers" value="{{ max_customers }}"></p>
+    <p>Average number of customers at a time: <input type="number" name="avg_customers" value="{{ avg_customers }}"></p>
+    <p>Number of employees: <input type="number" name="employees" value="{{ employees }}"></p>
+    <p>Area in square feet: <input type="number" name="area" value="{{ area }}"></p>
+    <input type="submit" value="Save Changes">
+  </form>
+{% endblock %}
