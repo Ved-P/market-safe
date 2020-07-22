@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Customer
+from .models import Customer, Visit
 from business.models import Business
 
 # Create your views here.
@@ -100,11 +100,33 @@ def view(request, key):
             "open": business.open
         })
 
-def reccomendation(request):
-    pass
+def reccomendation(request, key):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        business = Business.objects.get(pk=key)
+        pass
 
-def reserve(request):
-    pass
+def reserve(request, key):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    elif request.method == "POST":
+        business = Business.objects.get(pk=key)
+        customer = Customer.objects.get(user=request.user)
+        date = request.POST["date"]
+        visit = Visit(customer=customer, business=business, date=date)
+        visit.save()
+        return render(request, 'customer/reserve.html', {
+            "business_name": business.name,
+            "business_id": business.id,
+            "message": "Succesfully reserved spot!"
+        })
+    else:
+        business = Business.objects.get(pk=key)
+        return render(request, 'customer/reserve.html', {
+            "business_name": business.name,
+            "business_id": business.id
+        })
 
 def positive(request):
     pass

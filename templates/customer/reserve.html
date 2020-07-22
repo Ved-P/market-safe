@@ -1,0 +1,25 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
+  <style>
+    form {
+      padding: 50px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <h1>Reserve a spot for {{ business_name }}</h1>
+  <form action="{% url 'customer:reserve' business_id %}" method="post">
+    {% csrf_token %}
+    <h3>Select a Date:</h3>
+    <input type="date" name="date"><br><br>
+    <input type="submit" value="Reserve a Spot!">
+  </form>
+
+  {% if message %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+  {% endif %}
+{% endblock %}

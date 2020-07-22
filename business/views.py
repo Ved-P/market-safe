@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Business
-from customer.models  import Customer
+from customer.models  import Customer, Visit
 
 # Create your views here.
 def index(request):
