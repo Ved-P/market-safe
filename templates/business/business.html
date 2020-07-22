@@ -1,0 +1,17 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>Welcome, {{ request.user.first_name }}!</h1>
+  <p>This is your dashboard. To view analytics for your businesses, click <a id="test" href="{% url 'business:analytics'%}">here</a>. To view who has reserved a spot to come to your store, please click Spots on the navigation bar. To see any alerts about COVID - 19, click Alerts.</p>
+  {% if open == 0 %}
+    <p>Are you ready to reopen your business? If so, click <a id="test" href="{% url 'business:negative' %}">here</a>.</p>
+  {% elif open == 1 %}
+    <p>Would you like to close your store for the time being? If so, click <a id="test" href="{% url 'business:positive' %}">here</a>.</p>
+  {% endif %}
+  <p>Thank you for using Market Safe!</p>
+{% endblock %}

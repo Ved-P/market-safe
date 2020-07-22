@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Market Safe - Business</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fondamento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href="{% static 'business/navbar.css' %}">
+    {% block stylesheets %}
+    {% endblock %}
+  </head>
+  <body>
+    <nav>
+      <h2><a href="{% url 'business:business' %}">Market Safe - Business</a></h2>
+      <a class="small" href="{% url 'business:spots' %}">Spots</a>
+      <a class="small" href="{% url 'business:alerts' %}">Alerts</a>
+      <a class="small" href="{% url 'business:logout' %}">Logout</a>
+    </nav>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>

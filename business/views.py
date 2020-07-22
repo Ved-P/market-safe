@@ -4,12 +4,17 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Business
+from customer.models  import Customer
 
 # Create your views here.
 def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("business:login"))
-    return HttpResponse("hello")
+    else:
+        business = Business.objects.get(user=request.user)
+        return render(request, "business/business.html", {
+            "open": business.open
+        })
 
 def login_view(request):
     if request.user.is_authenticated:
