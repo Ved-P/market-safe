@@ -1,0 +1,15 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>Analytics for {{ request.user.first_name }}.</h1>
+  <p>Maximum number of customers at a time: {{ max_customers }}</p>
+  <p>Average number of customers at a time: {{ avg_customers }}</p>
+  <p>Number of employees: {{ employees }}</p>
+  <p>Area in square feet: {{ area }}</p>
+  <p>Would you like to change these analytics? Click <a id="test" href="{% url 'business:edit' %}">here</a>.</p>
+{% endblock %}

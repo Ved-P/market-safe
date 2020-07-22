@@ -78,7 +78,16 @@ def edit(request):
     pass
 
 def analytics(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:login"))
+    else:
+        business = Business.objects.get(user=request.user)
+        return render(request, "business/analytics.html", {
+            "max_customers": business.max_customers,
+            "avg_customers": business.avg_customers,
+            "employees": business.employees,
+            "area": business.area
+        })
 
 def spots(request):
     pass
