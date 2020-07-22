@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Business
 from customer.models  import Customer, Visit
+import datetime
 
 # Create your views here.
 def index(request):
@@ -106,7 +107,18 @@ def analytics(request):
         })
 
 def spots(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:login"))
+    else:
+        business = Business.objects.get(user=request.user)
+        todays_date = datetime.date.today()
+        tomorrows_date = todays_date + datetime.timedelta(days = 1)
+        todays_visits = Visit.objects.filter(business=business, date=todays_date)
+        tomorrows_visits = Visit.objects.filter(business=business, date=tomorrows_date)
+        return render(request, 'business/spots.html', {
+            "todays_visits": todays_visits,
+            "tomorrows_visits": tomorrows_visits
+        })
 
 def positive(request):
     pass

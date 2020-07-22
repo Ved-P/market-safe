@@ -17,4 +17,4 @@ class Visit(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return f"{self.customer} to {self.business}"
+        return f"{self.customer}"

@@ -1,0 +1,21 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>Today's reservations for {{ request.user.first_name }}:</h1>
+  {% for visit in todays_visits %}
+    <p>{{ visit }}</p>
+  {% empty %}
+    <p>Nobody has reserved a spot to come to store for this day yet.</p>
+  {% endfor %}
+  <h1>Tomorrows's reservations for {{ request.user.first_name }}:</h1>
+  {% for visit in tomorrows_visits %}
+    <p>{{ visit }}</p>
+  {% empty %}
+    <p>Nobody has reserved a spot to come to store for this day yet.</p>
+  {% endfor %}
+{% endblock %}
