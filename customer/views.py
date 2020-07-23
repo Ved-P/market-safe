@@ -136,7 +136,11 @@ def positive(request):
         return render(request, 'customer/positive.html')
 
 def negative(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        Customer.objects.filter(user=request.user).update(test_status=2)
+        return render(request, 'customer/negative.html')
 
 def alerts(request):
     pass

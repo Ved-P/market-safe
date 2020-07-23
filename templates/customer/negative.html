@@ -1,0 +1,11 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>Congratulations, {{ request.user.first_name }}!</h1>
+  <p>You recovered from COVID - 19! Now, because you have the antibodies to fight against Sars-CoV-2, you don't have to worry about getting COVID-19 again. (That doesn't mean you can stop social distancing!) Thank you for informing us!</p>
+{% endblock %}
