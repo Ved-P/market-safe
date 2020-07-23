@@ -129,7 +129,11 @@ def reserve(request, key):
         })
 
 def positive(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        Customer.objects.filter(user=request.user).update(test_status=1)
+        return render(request, 'customer/positive.html')
 
 def negative(request):
     pass

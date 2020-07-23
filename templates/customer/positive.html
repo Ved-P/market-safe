@@ -1,0 +1,11 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>We are so sorry to hear this bad news, {{ request.user.first_name }}.</h1>
+  <p>We hope you recover from COVID - 19 and get well soon. Thank you for informing us quickly. We have sent alerts to all people who may have been in contact with you.</p>
+{% endblock %}
