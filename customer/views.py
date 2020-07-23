@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Customer, Visit
 from business.models import Business
+import datetime
 
 # Create your views here.
 def index(request):
@@ -143,4 +144,27 @@ def negative(request):
         return render(request, 'customer/negative.html')
 
 def alerts(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        customer = Customer.objects.get(user=request.user)
+        alerts = []
+        for i in range(14):
+            date = datetime.date.today() - datetime.timedelta(days=i)
+            try:
+                visits = Visit.objects.filter(date=date)
+            except DoesNotExist:
+                continue
+            businessPos = set()
+            businessYou = set()
+            for visit in visits:
+                if visit.customer == customer:
+                    businessYou.add(visit.business)
+                elif visit.customer.test_status == 1:
+                    businessPos.add(visit.business)
+            for business in businessYou:
+                if business in businessPos:
+                    alerts.append("You may have been near someone who tested positive for COVID - 19. We reccomend you quarantine until " + str(date + datetime.timedelta(days=14)) + ".")
+        return render(request, 'customer/alerts.html', {
+            "alerts": alerts
+        })

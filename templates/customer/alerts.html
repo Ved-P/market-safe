@@ -1,0 +1,14 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
+{% endblock %}
+
+{% block body %}
+  {% for alert in alerts %}
+    <div class="alert alert-danger my-alert" role="alert">{{ alert }}</div>
+  {% empty %}
+    <p>You have no alerts!</p>
+  {% endfor %}
+{% endblock %}
