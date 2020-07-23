@@ -32,4 +32,4 @@ Please read our contributing guidelines __before__ starting to contribute.
 
 Thank you for using Market Safe!
 
-Note: This is a hackathon project for the hackathon <hack> Cupertino. You can find their website [here](https://hackcupertino2020.devpost.com/).
+Note: This is a hackathon project for the hackathon `<hack>` Cupertino. You can find their website [here](https://hackcupertino2020.devpost.com/).
