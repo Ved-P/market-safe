@@ -135,4 +135,20 @@ def negative(request):
         return render(request, 'business/negative.html')
 
 def alerts(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("customer:login"))
+    else:
+        business = Business.objects.get(user=request.user)
+        alerts = []
+        for i in range(14):
+            date = datetime.date.today() - datetime.timedelta(days=i)
+            try:
+                visits = Visit.objects.filter(business=business, date=date)
+            except DoesNotExist:
+                continue
+            for visit in visits:
+                if visit.customer.test_status == 1:
+                    alerts.append("You may have been near someone who tested positive for COVID - 19. We reccomend you quarantine until " + str(date + datetime.timedelta(days=14)) + ".")
+        return render(request, 'business/alerts.html', {
+            "alerts": alerts
+        })
