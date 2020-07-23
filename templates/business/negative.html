@@ -1,0 +1,11 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>This is great news, {{ request.user.first_name }}!</h1>
+  <p>We hope your business stays open from now on during these hard times. Thanks for informing us. We will update our pages so customers see that your business is open.</p>
+{% endblock %}
