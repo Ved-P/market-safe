@@ -121,7 +121,11 @@ def spots(request):
         })
 
 def positive(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("business:login"))
+    else:
+        Business.objects.filter(user=request.user).update(open=0)
+        return render(request, 'business/positive.html')
 
 def negative(request):
     pass

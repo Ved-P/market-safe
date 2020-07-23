@@ -1,0 +1,11 @@
+{% extends 'business/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'business/business.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>We are so sorry to hear this bad news, {{ request.user.first_name }}.</h1>
+  <p>We hope that you are able to open up again. Thanks for informing us. We will update our pages so customers see that your business is closed.</p>
+{% endblock %}
