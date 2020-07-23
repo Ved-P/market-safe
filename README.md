@@ -2,7 +2,7 @@
 
 A COVID - 19 related hackathon project that allows users to see AI reccomendations to go to some store and reserve a spot to go to that store, and also functions as a contact tracing site.
 
-As the COVID - 19 pandemic fades out, we will all eventally have to step out of our houses, whether it is to get groceries or medicine. However, we need to do it in a way that is carefully planned, or else we might face a second wave. Market-Safe is a web application that allows customers and local businesses in the community connect to plan in person visits. It also functions as a contac tracing app! Look below to see all the great things that can be done with Market Safe!
+As the COVID - 19 pandemic fades out, we will all eventally have to step out of our houses, whether it is to get groceries or medicine. However, we need to do it in a way that is carefully planned, or else we might face a second wave. Market Safe is a web application that allows customers and local businesses in the community connect to plan in person visits. It also functions as a contact tracing app! Look below to see all the great things that can be done with Market Safe!
 
 ## Customers can...
 
