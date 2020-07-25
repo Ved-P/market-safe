@@ -25,6 +25,7 @@ As the COVID - 19 pandemic fades out, we will all eventally have to step out of 
 - allow customers to reserve a specific time slot rather than just a day.
 - allow businesses to customize the page that the customers see when they visit their site.
 - add more AI to help businesses create standards that will minimize the chance of spreading diseases.
+- incorporate a real database rather than the self-made database I used for this project.
 
 ## Would you like to contribute?
 
