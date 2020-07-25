@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from .models import Customer, Visit
 from business.models import Business
 import datetime
+import csv
+from sklearn.linear_model import Perceptron
 
 # Create your views here.
 def index(request):
@@ -98,7 +100,8 @@ def view(request, key):
         return render(request, 'customer/view.html', {
             "business_name": business.name,
             "max_customers": business.max_customers,
-            "open": business.open
+            "open": business.open,
+            "business_id": key
         })
 
 def reccomendation(request, key):
@@ -106,7 +109,23 @@ def reccomendation(request, key):
         return HttpResponseRedirect(reverse("customer:login"))
     else:
         business = Business.objects.get(pk=key)
-        pass
+        model = Perceptron()
+        data = []
+        with open("ml_database.csv") as f:
+            reader = csv.reader(f)
+            for row in reader:
+                data.append({
+                    "evidence": [float(cell) for cell in row[:4]],
+                    "label": "Unsafe" if row[4] == "0" else "Safe"
+                })
+        evidence = [row["evidence"] for row in data]
+        labels = [row["label"] for row in data]
+        model.fit(evidence, labels)
+        predictions = model.predict([[business.max_customers, business.avg_customers, business.employees, business.area]])
+        return render(request, 'customer/reccomendation.html', {
+            "label": predictions[0],
+            "business_id": business_id
+        })
 
 def reserve(request, key):
     if not request.user.is_authenticated:

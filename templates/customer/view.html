@@ -11,6 +11,6 @@
   {% if open == 0 %}
     <p>This store is currently closed. Sorry for the inconvenience.</p>
   {% elif open == 1 %}
-    <p>This store is open. See our AI Reccomendation and reserve a spot <a id="test" href="url 'customer/reccomendation'">here</a>.</p>
+    <p>This store is open. See our AI Reccomendation and reserve a spot <a id="test" href="{% url 'customer/reccomendation' business_id %}">here</a>.</p>
   {% endif %}
 {% endblock %}
