@@ -1,0 +1,20 @@
+{% extends 'customer/layout.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'customer/customer.css' %}">
+  <style>
+    #no-padding {
+      padding: 0px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <h1>AI Reccomendation for {{ business_name }}:</h1>
+  {% if label == "Safe" %}
+    <p>Our AI thinks that this business follows good standards and is very safe. You can reserve a spot <a id="no-padding" href="{% url 'customer:reserve' business_id %}">here</a>.</p>
+  {% elif label == "Unsafe" %}
+    <p>Our AI think that this business may not follow proper standards and may have potential to spread the disease. Although we don't reccomend it, you can reserve a spot <a id="no-padding" href="{% url 'customer:reserve' business_id %}">here</a>.</p>
+  {% endif %}
+{% endblock %}

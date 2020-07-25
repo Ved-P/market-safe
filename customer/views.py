@@ -111,7 +111,7 @@ def reccomendation(request, key):
         business = Business.objects.get(pk=key)
         model = Perceptron()
         data = []
-        with open("ml_database.csv") as f:
+        with open("customer/mldatabase.csv") as f:
             reader = csv.reader(f)
             for row in reader:
                 data.append({
@@ -124,7 +124,8 @@ def reccomendation(request, key):
         predictions = model.predict([[business.max_customers, business.avg_customers, business.employees, business.area]])
         return render(request, 'customer/reccomendation.html', {
             "label": predictions[0],
-            "business_id": business_id
+            "business_id": business.id,
+            "business_name": business.name
         })
 
 def reserve(request, key):
