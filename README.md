@@ -26,6 +26,7 @@ As the COVID - 19 pandemic fades out, we will all eventally have to step out of 
 - allow businesses to customize the page that the customers see when they visit their site.
 - add more AI to help businesses create standards that will minimize the chance of spreading diseases.
 - incorporate a real database rather than the self-made database I used for this project.
+- allow customers to search for businesses that are near them first.
 
 ## Would you like to contribute?
 
